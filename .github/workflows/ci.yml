@@ -61,6 +61,16 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
 
+      # Qt's window code loads the system's EGL and OpenGL libraries even when
+      # it draws offscreen, and GitHub's Ubuntu image lacks them (the window
+      # tests failed to import libEGL.so.1, 2026-10-08). Setup, not a check.
+      - name: Install Qt's system libraries (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q libegl1 libgl1 libxkbcommon0 \
+            libfontconfig1 libdbus-1-3
+
       # uv's version is pinned in the script; every other tool is locked in
       # uv.lock and run through it.
       - name: Install uv
