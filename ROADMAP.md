@@ -272,8 +272,11 @@ of success are cited by their `docs/discovery.md` labels, S1 to S10.
   the exact word "Paperkist" found no use (nearest: Paperkast, Paper
   Kiss). EU/UK registers still not reached: TMview's API returned an
   empty body to curl, and the browser extension was not connected.
-  Shipped 2026-10-08: renamed Paperkist after the owner's TMview check
-  of the EU and UK registers found nothing. Package src/paperkist/,
+  Shipped 2026-10-08: renamed Paperkist. A TMview search (EU, UK and many
+  national offices), run by Claude in the owner's browser on 2026-10-08,
+  found no mark containing "Paperkist"; the nearest, PAPERKISS, expired
+  (Australia 2019, New Zealand 2020). Corrects an earlier note that said
+  the owner had checked. Package src/paperkist/,
   repository milnet01/paperkist. vault.deedbox, the DBX* prefixes, the
   associated-data label and the sample password keep the old name.
 

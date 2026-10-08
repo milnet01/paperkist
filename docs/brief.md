@@ -220,8 +220,10 @@ Things a personal tool never needed:
   gets free build minutes, so this costs nothing.
 - **A licence**, chosen before the first public commit. Done: GPL-3.0.
 - **A name nobody else is using.** Done: Paperkist, after "Folio" and
-  "Deedbox" were taken. Checked against the US, EU and UK trademark
-  registers on 2026-09-28 and 2026-10-08 (DEED-0023).
+  "Deedbox" were taken. No trademark contains "Paperkist" in the US
+  register (searched 2026-09-28) or in TMview, which covers the EU, UK
+  and many national offices (searched 2026-10-08). The nearest,
+  PAPERKISS, has expired (DEED-0023).
 - **Help written for non-technical people** — especially setup, backup and
   "what happens if I forget my password".
 - **A place to report bugs**, and a security contact for vulnerabilities.
