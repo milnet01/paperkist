@@ -30,6 +30,17 @@ The `[Unreleased]` block stays at the top, always, even when empty.
   rewriting only the kinds of file whose format changed. An upgrade cut
   off by a crash or power cut carries on at the next open.
 
+- **A window for your vault** (DEED-0005)
+  Create a vault or unlock one, add documents by dragging them onto the
+  window, and see PDFs and pictures beside the list. Create stays
+  greyed out until you tick that a forgotten password cannot be
+  recovered. Documents are shown from memory; no readable copy is
+  written to disk.
+
+- **Ready for translation** (DEED-0035)
+  Every word on screen can be translated, and the windows turn around
+  for right-to-left languages. The translations themselves come later.
+
 ### Changed
 
 - **The app is now called Paperkist** (DEED-0023)

@@ -5,13 +5,19 @@
 
 ## Status
 
-Early development. Not ready for use: there is no window yet, and no
-installer. The encrypted storage and crash recovery are built and
-tested on Linux.
+Early development. Not ready for everyday use: there is no installer,
+and search, reminders and export are still to come. You can create a
+vault, add documents by dragging them in, and view PDFs and pictures
+inside the window. Tested on Linux, Windows and macOS.
 
 ## Install
 
-Not yet installable.
+Not yet installable. To try it from the source code, install
+[uv](https://docs.astral.sh/uv/), then run this in the project folder:
+
+```sh
+uv run python -m paperkist
+```
 
 ## Documentation
 

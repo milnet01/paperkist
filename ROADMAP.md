@@ -86,7 +86,7 @@ of success are cited by their `docs/discovery.md` labels, S1 to S10.
   resumable upgrade on open, frozen sample vault
   tests/fixtures/vault-format-1/. 50 tests green on Linux and Windows.
 
-- 📋 [DEED-0005] **Main window: create or unlock a vault, add, list and view documents.**
+- ✅ [DEED-0005] **Main window: create or unlock a vault, add, list and view documents.**
   Build step 3. Vault creation says in plain words that a forgotten
   password loses everything (S2). Drag-in adding, a document list, and
   the in-window PDF and image viewer with no decrypted temporary file.
@@ -100,6 +100,11 @@ of success are cited by their `docs/discovery.md` labels, S1 to S10.
   (S2). A new password needs 12+ characters, typed twice, no other rules.
   A new vault defaults to a Paperkist-named folder in Documents, and any
   folder can be chosen.
+  Shipped 2026-10-08: start, create and main windows in src/paperkist/ui/,
+  start-up in src/paperkist/__main__.py. Tests: tests/test_ui_dialogs.py,
+  test_ui_main_window.py. Linux and the Windows test box 78/78. Not yet:
+  the expiry check on opening (no expiry part yet); unlocking runs in the
+  window's thread behind a busy cursor.
 
 - 📋 [DEED-0006] **Filing: category, tags, dates, note, with suggestions.**
   Editing a document's metadata, and `suggest` proposing a title,
@@ -351,12 +356,15 @@ of success are cited by their `docs/discovery.md` labels, S1 to S10.
   Source: review-contract design.md loop 7, 2026-09-28.
   Lanes: design, vault.
 
-- 📋 [DEED-0035] **Translation-ready from the first window.**
+- ✅ [DEED-0035] **Translation-ready from the first window.**
   Owner's decision (2026-09-28): all user-facing text goes through
   Qt's translation mechanism and every window lays out correctly
   mirrored for right-to-left, from the first window. The translations
   themselves are DEED-0027 (0.3.0). Needs a design rule, gated before
   DEED-0005's windows are built.
+  Shipped 2026-10-08: every ui string goes through Qt translation, layouts
+  mirror right-to-left, start-up installs ui/translations/paperkist_<lang>.qm.
+  Tests: tests/test_ui_text.py, tests/test_app.py.
   **Layman:** Every piece of on-screen text can be translated, and windows work right-to-left, so languages can be added later without rebuilding the windows.
   Kind: feature.
   Source: user-request-2026-09-28.
