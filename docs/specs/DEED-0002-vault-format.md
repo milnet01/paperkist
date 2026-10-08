@@ -7,7 +7,7 @@
 spec written for build step 1").
 **Blocker for:** DEED-0003.  **Pairs with:** DEED-0004.
 
-**Layman:** This is the locked drawer itself — how Deedbox stores your
+**Layman:** This is the locked drawer itself — how Paperkist stores your
 files on disk so that only your password opens them, and so that every
 future version can still read them.
 
@@ -21,7 +21,7 @@ content, name or date (S5), and that a folder copy fully backs up (S6).
 
 ## 2. Problem
 
-1. There is no code yet (`src/deedbox/__init__.py` holds only a
+1. There is no code yet (`src/paperkist/__init__.py` holds only a
    docstring). Build step 1 of `docs/brief.md` is this.
 2. `docs/design.md` and ADR-0001 fix the direction — PyNaCl, a random
    vault key wrapped by an Argon2id key, secretstream for content,
@@ -63,7 +63,9 @@ content, name or date (S5), and that a folder copy fully backs up (S6).
 
 ### 4.2 The header, and the key record
 
-`vault.deedbox` is the only plaintext file. `vault` writes and reads the
+`vault.deedbox` is the only plaintext file. It and the associated-data
+label (§ 4.4) keep the app's old name, Deedbox: existing vaults need them
+(DEED-0023). `vault` writes and reads the
 outer object; the `key_record` value is `crypto`'s, and `vault` stores it
 without reading it (`docs/design.md`, rule 2).
 
@@ -185,20 +187,20 @@ items add keys, and readers keep keys they do not know:
 
 ### 4.6 Code, and what other parts call
 
-`src/deedbox/errors.py`:
+`src/paperkist/errors.py`:
 
 ```python
-class DeedboxError(Exception): ...
-class NotAVault(DeedboxError): ...      # no vault.deedbox in the folder
-class VaultExists(DeedboxError): ...    # create() on a non-empty folder
-class WrongPassword(DeedboxError): ...  # the key record will not unwrap
-class VaultCorrupt(DeedboxError): ...   # any other decrypt or parse failure
-class NotEnoughMemory(DeedboxError): ... # Argon2id could not allocate
-class VaultTooNew(DeedboxError): ...    # a format number above what we read
-class DocumentMissing(DeedboxError): ...
+class PaperkistError(Exception): ...
+class NotAVault(PaperkistError): ...      # no vault.deedbox in the folder
+class VaultExists(PaperkistError): ...    # create() on a non-empty folder
+class WrongPassword(PaperkistError): ...  # the key record will not unwrap
+class VaultCorrupt(PaperkistError): ...   # any other decrypt or parse failure
+class NotEnoughMemory(PaperkistError): ... # Argon2id could not allocate
+class VaultTooNew(PaperkistError): ...    # a format number above what we read
+class DocumentMissing(PaperkistError): ...
 ```
 
-`src/deedbox/crypto.py` (the only importer of `nacl`):
+`src/paperkist/crypto.py` (the only importer of `nacl`):
 
 ```python
 def new_key_record(password: str, *, opslimit: int | None = None,
@@ -218,7 +220,7 @@ Argon2id derivation raises `nacl.exceptions.RuntimeError` (checked
 `crypto` turns it into `NotEnoughMemory` — never `WrongPassword`. Every
 other failure is `VaultCorrupt`; no `nacl` exception leaves `crypto`.
 
-`src/deedbox/vault/vault.py` — the `Vault` object other parts use:
+`src/paperkist/vault/vault.py` — the `Vault` object other parts use:
 
 ```python
 class Vault:
@@ -234,7 +236,7 @@ class Vault:
     def close(self) -> None: ...
 ```
 
-`src/deedbox/vault/layout.py` owns the paths and the file prefixes;
+`src/paperkist/vault/layout.py` owns the paths and the file prefixes;
 `vault/documents.py` owns reading and writing `<id>.c` and `<id>.m`;
 `vault/atomic.py` owns write-new, flush, replace (`os.replace`). This
 item creates it with two entry points, `write_bytes(target, data)` and a
@@ -351,7 +353,7 @@ fails it (the rule-2 breach case in that file).
 
 **Trust boundary.** The vault folder is untrusted input: anyone with the
 folder can change its bytes. INV-4, INV-5 and INV-8 are the defences, and
-`crypto`'s rule of raising only Deedbox errors keeps a malformed file
+`crypto`'s rule of raising only Paperkist errors keeps a malformed file
 from surfacing as an unhandled library exception.
 
 ## 6. Failure modes

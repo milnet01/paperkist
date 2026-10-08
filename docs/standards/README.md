@@ -1,4 +1,4 @@
-# Standards for Deedbox
+# Standards for Paperkist
 
 **The standards are global and are read in place**, at
 `~/.claude/standards/`. There is exactly one copy of each, shared by

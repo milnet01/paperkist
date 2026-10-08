@@ -1,4 +1,4 @@
-# ADR-0002: Deedbox is written in Python, with PySide6 for the window
+# ADR-0002: Paperkist is written in Python, with PySide6 for the window
 
 - **Status:** Accepted
 - **Date:** 2026-09-27
@@ -25,7 +25,7 @@ Python, chosen by the owner on 2026-09-27, with PySide6 as the Qt binding.
   3.15. Package metadata and the CI matrix state both bounds, and move
   the ceiling only when PySide6 is bumped.
 - Installers are larger and start-up is slower than a C++ build.
-- Python cannot guarantee decrypted data is wiped from memory. Deedbox
+- Python cannot guarantee decrypted data is wiped from memory. Paperkist
   protects the vault at rest, not a machine already compromised while the
   vault is open.
 - Rolodex uses GTK, not Qt, so no window code is shared with it.

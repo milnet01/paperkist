@@ -9,8 +9,8 @@ import nacl.pwhash.argon2id as argon2id
 import nacl.utils
 import pytest
 
-from deedbox import crypto
-from deedbox.errors import VaultCorrupt, WrongPassword
+from paperkist import crypto
+from paperkist.errors import VaultCorrupt, WrongPassword
 
 FAST = {"opslimit": argon2id.OPSLIMIT_MIN, "memlimit": argon2id.MEMLIMIT_MIN}
 

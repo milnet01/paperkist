@@ -8,20 +8,20 @@ order).
 **Blocked by:** DEED-0002.  **Pairs with:** DEED-0004.
 
 **Layman:** This makes sure a crash or a power cut never loses a filed
-document, and that Deedbox always knows what is in the vault.
+document, and that Paperkist always knows what is in the vault.
 
 ## 1. Goal
 
 A vault keeps an encrypted index of its documents, saves every change so
 that a crash at any moment leaves each file whole, and on opening repairs
 whatever an interrupted save left behind — so the vault opens with every
-document filed before the crash (S8). Only one copy of Deedbox can have a
+document filed before the crash (S8). Only one copy of Paperkist can have a
 vault open at a time.
 
 ## 2. Problem
 
 1. DEED-0002 stores documents but nothing lists them: `Vault` in
-   `src/deedbox/vault/vault.py` has `add`, `read`, `metadata` and `close`,
+   `src/paperkist/vault/vault.py` has `add`, `read`, `metadata` and `close`,
    and no way to enumerate what it holds.
 2. `docs/design.md` fixes the recovery rules — the index is the truth,
    each metadata file its document's recovery copy, the write orders, and
@@ -30,7 +30,7 @@ vault open at a time.
    target, but does not flush the folder after the replace. On Linux and
    macOS a power cut can then lose a replace the program already
    reported as done.
-4. Nothing stops two copies of Deedbox opening one vault. Each would save
+4. Nothing stops two copies of Paperkist opening one vault. Each would save
    its own index over the other's, and a filed document would drop out.
 
 ## 3. Scope decisions (agreed with the user)
@@ -158,13 +158,13 @@ file, so nothing in steps 1–6 meets one.
 
 ### 4.7 What other parts call
 
-`src/deedbox/errors.py` gains:
+`src/paperkist/errors.py` gains:
 
 ```python
-class VaultInUse(DeedboxError): ...  # another process has it open
+class VaultInUse(PaperkistError): ...  # another process has it open
 ```
 
-`Vault` in `src/deedbox/vault/vault.py` gains:
+`Vault` in `src/paperkist/vault/vault.py` gains:
 
 ```python
 def documents(self) -> list[dict]: ...           # every index entry, copied
@@ -176,9 +176,9 @@ def damaged(self) -> list[str]: ...               # ids found by reconcile
 `update` merges `changes` into the entry, raises `ValueError` if
 `changes` holds `id` or `edit`, raises `edit` by one, and writes index
 then metadata file. `remove` of an unknown id raises `DocumentMissing`.
-The index code lives in `src/deedbox/vault/index.py` (load, save,
+The index code lives in `src/paperkist/vault/index.py` (load, save,
 reconcile) and
-`src/deedbox/vault/rebuild.py` (rebuild from metadata files), as
+`src/paperkist/vault/rebuild.py` (rebuild from metadata files), as
 `docs/design.md` names them.
 
 ## 5. Invariants

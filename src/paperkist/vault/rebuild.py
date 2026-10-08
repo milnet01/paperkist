@@ -7,8 +7,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from deedbox.errors import VaultCorrupt
-from deedbox.vault import documents, layout
+from paperkist.errors import VaultCorrupt
+from paperkist.vault import documents, layout
 
 
 def rebuild(folder: Path, key: bytes) -> list[dict]:

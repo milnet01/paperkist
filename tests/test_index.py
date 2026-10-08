@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import nacl.pwhash.argon2id as argon2id
 
-from deedbox.vault import Vault
+from paperkist.vault import Vault
 
 FAST = {"opslimit": argon2id.OPSLIMIT_MIN, "memlimit": argon2id.MEMLIMIT_MIN}
 

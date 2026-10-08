@@ -73,7 +73,7 @@ wheels = [
 ]
 
 [[package]]
-name = "deedbox"
+name = "paperkist"
 version = "0.0.0"
 source = { editable = "." }
 dependencies = [

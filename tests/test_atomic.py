@@ -16,7 +16,7 @@ from collections.abc import Iterator
 from contextlib import contextmanager
 from pathlib import Path
 
-from deedbox.vault import atomic
+from paperkist.vault import atomic
 
 HOLD_DELAY = 0.2  # generous margin: the operations' own work takes microseconds
 

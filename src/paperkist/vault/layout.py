@@ -11,12 +11,13 @@ import secrets
 import struct
 from pathlib import Path
 
-from deedbox.errors import VaultCorrupt, VaultTooNew
+from paperkist.errors import VaultCorrupt, VaultTooNew
 
 # Read when called, never copied at import: tests raise them to exercise
 # migration (DEED-0004 § 7).
 VAULT_FORMAT = 1
 FILE_FORMAT = {"content": 1, "metadata": 1, "index": 1}
+# The app's old name, kept: existing vaults need it (DEED-0023).
 HEADER = "vault.deedbox"
 OBJECTS = "objects"
 

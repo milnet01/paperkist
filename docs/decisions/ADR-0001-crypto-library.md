@@ -1,4 +1,4 @@
-# ADR-0001: PyNaCl (libsodium) does all of Deedbox's encryption
+# ADR-0001: PyNaCl (libsodium) does all of Paperkist's encryption
 
 - **Status:** Accepted
 - **Date:** 2026-09-27
@@ -27,7 +27,7 @@ installing each and inspecting it:
 
 ## Decision
 
-Use PyNaCl for all encryption. Only `src/deedbox/crypto.py` imports it.
+Use PyNaCl for all encryption. Only `src/paperkist/crypto.py` imports it.
 
 - **Keys.** Argon2id turns the password into a key that wraps a random
   vault key, using the single-message encryption below. The vault key

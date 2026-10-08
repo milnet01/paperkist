@@ -1,4 +1,4 @@
-# Deedbox — Discovery
+# Paperkist — Discovery
 
 > **Purpose — so that later, anyone can tell whether the thing being
 > built is still the thing that was wanted.**
@@ -42,7 +42,7 @@ apps with expiry reminders are phone-only (`docs/brief.md`, Prior-art check).
 
 ## Signs it is working
 
-- **S1** — Someone who didn't build it installs Deedbox on Windows, macOS
+- **S1** — Someone who didn't build it installs Paperkist on Windows, macOS
   or Linux, creates a vault and files a first document without help.
 - **S2** — Before a vault is created, the app says in plain words that a
   forgotten password means the documents are gone for good.
@@ -58,7 +58,7 @@ apps with expiry reminders are phone-only (`docs/brief.md`, Prior-art check).
 - **S6** — Copy the vault folder to another computer, open it with the
   password, and every document is there. That copy is the whole backup.
 - **S7** — Any document comes back out as the original file, one at a time
-  or the whole vault at once, and opens without Deedbox.
+  or the whole vault at once, and opens without Paperkist.
 - **S8** — Pull the power mid-filing, and the vault still opens with every
   document filed before that moment.
 - **S9** — A vault made with an older release opens in the newest one.

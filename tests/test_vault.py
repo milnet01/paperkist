@@ -12,8 +12,8 @@ from pathlib import Path
 import nacl.pwhash.argon2id as argon2id
 import pytest
 
-from deedbox.errors import VaultCorrupt, VaultTooNew, WrongPassword
-from deedbox.vault import Vault
+from paperkist.errors import VaultCorrupt, VaultTooNew, WrongPassword
+from paperkist.vault import Vault
 
 FAST = {"opslimit": argon2id.OPSLIMIT_MIN, "memlimit": argon2id.MEMLIMIT_MIN}
 PIECE_OUT = 65536 + 17  # ciphertext bytes per full secretstream piece

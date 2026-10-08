@@ -1,4 +1,4 @@
-# Deedbox — Design
+# Paperkist — Design
 
 > **Purpose — so the shape is decided once, and anyone can tell where a
 > new piece of work belongs and what it is allowed to touch.**
@@ -14,27 +14,27 @@ are cited below.
 
 ## The parts
 
-All code lives in the Python package `src/deedbox/`. Tests mirror it under
+All code lives in the Python package `src/paperkist/`. Tests mirror it under
 `tests/`.
 
 | Part | Responsible for | Files |
 |---|---|---|
-| **crypto** | Turning a password into a key; encrypting document content as a stream (secretstream) and the index and metadata files as single messages. The only code that touches the encryption library. | `src/deedbox/crypto.py` |
-| **vault** | The vault on disk: its folder layout, format version and header, the encrypted document files, and the one atomic-write helper. Opening, closing, adding, reading, removing. | `src/deedbox/vault/layout.py`, `vault/documents.py`, `vault/atomic.py`, `vault/lock.py`, `vault/vault.py` |
-| **index** | The encrypted catalogue: each document's metadata and extracted text, saving it safely with the previous copy kept, and rebuilding it from the documents' metadata files. | `src/deedbox/vault/index.py`, `vault/rebuild.py` |
-| **migrate** | Upgrading a vault written by an older release to the current format (S9). | `src/deedbox/vault/migrate.py` |
-| **search** | Answering a query from the loaded index (S3). | `src/deedbox/search.py` |
-| **expiry** | Deciding what is upcoming and what has already expired (S4). Pure date logic. | `src/deedbox/expiry.py` |
-| **extract** | Getting text out of a document: the free path for PDFs that already contain text, and OCR for scans (S3), rendering scanned PDF pages to images in memory first. Plain and synchronous; `ui` runs it in a worker thread. | `src/deedbox/extract/pdftext.py`, `extract/ocr.py` |
-| **suggest** | Proposing a title, category and date from a filename and extracted text. Suggests only; never files. | `src/deedbox/suggest.py` |
-| **export** | The only code that writes readable plaintext to disk: one document, or the whole vault (S7). | `src/deedbox/export.py` |
-| **update** | On Windows and macOS: checking for, downloading and installing a new release (DEED-0024). The only code that opens a network connection. Asks `crypto` to check each download's signature before installing it. Also tells `ui` how Deedbox was installed. The Linux Flatpak cannot replace its own files; there `ui` asks Flatpak's update service, through Qt, to install the new version from the store it came from. | `src/deedbox/update/`; the network code in `update/fetch.py` alone |
-| **errors** | The shared error types every part raises. | `src/deedbox/errors.py` |
-| **ui** | Every window, dialog and the in-window document viewer, and the worker threads for extraction. Runs the expiry check when the main window opens. Owns the translation files. | `src/deedbox/ui/` — one file per window or dialog; translation sources in `ui/translations/` |
-| **app** | Start-up: builds the Qt application, loads the compiled translation for the system's language from `ui/translations/`, and opens the first window. | `src/deedbox/__main__.py` |
-| **packaging** | Building the installers: PyInstaller for Windows and macOS, the Flatpak for Linux, each bundling Tesseract (S1) and the compiled translations. Imports nothing from Deedbox; it packages the tree. | `packaging/` |
+| **crypto** | Turning a password into a key; encrypting document content as a stream (secretstream) and the index and metadata files as single messages. The only code that touches the encryption library. | `src/paperkist/crypto.py` |
+| **vault** | The vault on disk: its folder layout, format version and header, the encrypted document files, and the one atomic-write helper. Opening, closing, adding, reading, removing. | `src/paperkist/vault/layout.py`, `vault/documents.py`, `vault/atomic.py`, `vault/lock.py`, `vault/vault.py` |
+| **index** | The encrypted catalogue: each document's metadata and extracted text, saving it safely with the previous copy kept, and rebuilding it from the documents' metadata files. | `src/paperkist/vault/index.py`, `vault/rebuild.py` |
+| **migrate** | Upgrading a vault written by an older release to the current format (S9). | `src/paperkist/vault/migrate.py` |
+| **search** | Answering a query from the loaded index (S3). | `src/paperkist/search.py` |
+| **expiry** | Deciding what is upcoming and what has already expired (S4). Pure date logic. | `src/paperkist/expiry.py` |
+| **extract** | Getting text out of a document: the free path for PDFs that already contain text, and OCR for scans (S3), rendering scanned PDF pages to images in memory first. Plain and synchronous; `ui` runs it in a worker thread. | `src/paperkist/extract/pdftext.py`, `extract/ocr.py` |
+| **suggest** | Proposing a title, category and date from a filename and extracted text. Suggests only; never files. | `src/paperkist/suggest.py` |
+| **export** | The only code that writes readable plaintext to disk: one document, or the whole vault (S7). | `src/paperkist/export.py` |
+| **update** | On Windows and macOS: checking for, downloading and installing a new release (DEED-0024). The only code that opens a network connection. Asks `crypto` to check each download's signature before installing it. Also tells `ui` how Paperkist was installed. The Linux Flatpak cannot replace its own files; there `ui` asks Flatpak's update service, through Qt, to install the new version from the store it came from. | `src/paperkist/update/`; the network code in `update/fetch.py` alone |
+| **errors** | The shared error types every part raises. | `src/paperkist/errors.py` |
+| **ui** | Every window, dialog and the in-window document viewer, and the worker threads for extraction. Runs the expiry check when the main window opens. Owns the translation files. | `src/paperkist/ui/` — one file per window or dialog; translation sources in `ui/translations/` |
+| **app** | Start-up: builds the Qt application, loads the compiled translation for the system's language from `ui/translations/`, and opens the first window. | `src/paperkist/__main__.py` |
+| **packaging** | Building the installers: PyInstaller for Windows and macOS, the Flatpak for Linux, each bundling Tesseract (S1) and the compiled translations. Imports nothing from Paperkist; it packages the tree. | `packaging/` |
 
-**`vault` in the rules below means the whole `src/deedbox/vault/`
+**`vault` in the rules below means the whole `src/paperkist/vault/`
 package** — vault, index and migrate. They share the atomic-write helper
 and the key, and change whenever the format does. Nothing outside the
 package reads the index's file layout.
@@ -85,9 +85,9 @@ by reading imports; a condition a rule attaches needs a behaviour test.
     **`update` may call only `crypto`** (besides `errors`). These were arrows in the diagram below; the
     diagram renders the rules and does not add to them.
 11. **`packaging` is not imported by anything and imports nothing from
-    `src/deedbox/`.** It builds installers from the tree and the
-    dependency lock; no Deedbox code may assume it runs installed. Only
-    `update` asks how Deedbox was installed, and it does nothing when it
+    `src/paperkist/`.** It builds installers from the tree and the
+    dependency lock; no Paperkist code may assume it runs installed. Only
+    `update` asks how Paperkist was installed, and it does nothing when it
     cannot tell. Flatpak's update service installs a release only if it
     asks for no more sandbox permissions than the installed one; a
     Flatpak release that widens them reaches users only through their
@@ -198,7 +198,7 @@ app ─► ui ─► vault ─► crypto
 **What it rules out:**
 
 - **No web interface and no local server.** Nothing listens on a port.
-- **No outside PDF viewer.** Viewing happens in Deedbox's window.
+- **No outside PDF viewer.** Viewing happens in Paperkist's window.
 - **No reliable wiping of memory.** Python cannot guarantee a decrypted
   document is erased from memory after use. The protection is for the
   vault at rest (S5), not against someone already running code on the

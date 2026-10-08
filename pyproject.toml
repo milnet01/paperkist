@@ -1,5 +1,5 @@
 [project]
-name = "deedbox"
+name = "paperkist"
 version = "0.0.0"
 description = "An encrypted local vault for personal paperwork, with search and expiry reminders."
 readme = "README.md"
@@ -26,7 +26,7 @@ requires = ["hatchling>=1.32.4"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/deedbox"]
+packages = ["src/paperkist"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

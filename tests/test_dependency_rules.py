@@ -1,6 +1,6 @@
 """Enforce docs/design.md § What may depend on what, by reading imports.
 
-Every module under src/deedbox belongs to one part of the design. Each part
+Every module under src/paperkist belongs to one part of the design. Each part
 may import only the parts and outside libraries the design allows it. A
 module that belongs to no part fails too: a new part is a design change,
 so docs/design.md and PARTS below change together.
@@ -13,9 +13,9 @@ from pathlib import Path
 
 import pytest
 
-SRC = Path(__file__).resolve().parent.parent / "src" / "deedbox"
+SRC = Path(__file__).resolve().parent.parent / "src" / "paperkist"
 
-# Module name (relative to the deedbox package) -> part. A name ending in "."
+# Module name (relative to the paperkist package) -> part. A name ending in "."
 # claims that subpackage and everything under it.
 PARTS = {
     "": "package",
@@ -68,7 +68,7 @@ ONLY_IN = {  # library -> the parts that alone may import it
 
 
 def part_of(module: str) -> str | None:
-    """The design part that owns `module` (a name relative to deedbox)."""
+    """The design part that owns `module` (a name relative to paperkist)."""
     for prefix, part in PARTS.items():
         if prefix.endswith("."):
             if module == prefix[:-1] or module.startswith(prefix):
@@ -97,15 +97,15 @@ def imports_of(path: Path, module: str) -> list[str]:
             if node.level == 0:
                 base = node.module or ""
             else:
-                here = ["deedbox", *filter(None, module.split("."))]
+                here = ["paperkist", *filter(None, module.split("."))]
                 if not is_package:
                     here.pop()
                 here = here[: len(here) - (node.level - 1)]
                 base = ".".join([*here, *filter(None, [node.module])])
-            # `from deedbox import crypto` imports the submodule crypto,
+            # `from paperkist import crypto` imports the submodule crypto,
             # not the package.
-            if base == "deedbox":
-                names += [f"deedbox.{alias.name}" for alias in node.names]
+            if base == "paperkist":
+                names += [f"paperkist.{alias.name}" for alias in node.names]
             else:
                 names.append(base)
     return names
@@ -122,8 +122,8 @@ def violations(root: Path) -> list[str]:
             continue
         for name in imports_of(path, module):
             top = name.split(".")[0]
-            if top == "deedbox":
-                target = part_of(name.removeprefix("deedbox").removeprefix("."))
+            if top == "paperkist":
+                target = part_of(name.removeprefix("paperkist").removeprefix("."))
                 if (
                     target is not None
                     and target != part
@@ -151,7 +151,7 @@ BREACHES = [
         "import nacl.secret",
         "rule 2: encryption library outside crypto",
     ),
-    ("ui/main.py", "from deedbox import crypto", "rule 8: ui calls crypto"),
+    ("ui/main.py", "from paperkist import crypto", "rule 8: ui calls crypto"),
     ("search.py", "from .vault import vault", "rule 3: search reaches vault"),
     ("vault/index.py", "import tempfile", "rule 4: a temporary file"),
     ("expiry.py", "import pathlib", "rule 5: pure part touches disk"),
@@ -179,6 +179,6 @@ def test_allowed_imports_pass(tmp_path):
         encoding="utf-8",
     )
     (tmp_path / "__main__.py").write_text(
-        "from deedbox.ui import main\n", encoding="utf-8"
+        "from paperkist.ui import main\n", encoding="utf-8"
     )
     assert violations(tmp_path) == []

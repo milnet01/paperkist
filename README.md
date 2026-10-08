@@ -1,4 +1,4 @@
-# Deedbox
+# Paperkist
 
 > An encrypted vault on your own computer for receipts, warranties,
 > policies and ID — with search, and reminders before things expire.

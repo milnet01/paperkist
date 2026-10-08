@@ -117,7 +117,7 @@ def generate() -> None:
             f"{FIXTURE} already exists; the fixture is generated once and "
             "never overwritten"
         )
-    from deedbox.vault import Vault  # local: this module is also imported by tests
+    from paperkist.vault import Vault  # local: this module is also imported by tests
 
     sources = FIXTURE.parent / "_sample_vault_sources.tmp"
     sources.mkdir(parents=True)

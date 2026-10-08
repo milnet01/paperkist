@@ -10,9 +10,9 @@ import json
 from pathlib import Path
 from typing import BinaryIO
 
-from deedbox import crypto
-from deedbox.errors import DocumentMissing, VaultCorrupt
-from deedbox.vault import atomic, layout
+from paperkist import crypto
+from paperkist.errors import DocumentMissing, VaultCorrupt
+from paperkist.vault import atomic, layout
 
 
 def write_content(path: Path, key: bytes, src: BinaryIO, doc_id: str) -> None:

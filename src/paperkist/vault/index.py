@@ -8,10 +8,10 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from deedbox import crypto
-from deedbox.errors import DocumentMissing, VaultCorrupt, VaultTooNew
-from deedbox.vault import atomic, documents, layout
-from deedbox.vault.rebuild import rebuild
+from paperkist import crypto
+from paperkist.errors import DocumentMissing, VaultCorrupt, VaultTooNew
+from paperkist.vault import atomic, documents, layout
+from paperkist.vault.rebuild import rebuild
 
 INDEX = "index"
 PREVIOUS = "index.prev"

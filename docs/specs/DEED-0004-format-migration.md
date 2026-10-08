@@ -8,7 +8,7 @@ version*).
 **Blocked by:** DEED-0002.  **Pairs with:** DEED-0003.
 
 **Layman:** This makes sure a vault made with an older version of
-Deedbox always opens in a newer one, and that an upgrade cut off halfway
+Paperkist always opens in a newer one, and that an upgrade cut off halfway
 simply carries on next time.
 
 ## 1. Goal
@@ -44,7 +44,7 @@ later release must open it.
 
 ### 4.1 Format numbers
 
-`src/deedbox/vault/layout.py` replaces `FORMAT` with:
+`src/paperkist/vault/layout.py` replaces `FORMAT` with:
 
 ```python
 VAULT_FORMAT = 1                       # the header's "format"
@@ -83,7 +83,7 @@ not a number raises `VaultCorrupt`.
 
 ### 4.2 Steps
 
-`src/deedbox/vault/migrate.py` holds one registry:
+`src/paperkist/vault/migrate.py` holds one registry:
 
 ```python
 Step = Callable[[Path, BinaryIO, bytes, str], None]
@@ -269,7 +269,7 @@ fixture isolates.
   § 4.3 says.
 - **A vault from a newer release** → refused before anything is written
   (DEED-0003 § 4.6 step 0, and `_read_header`).
-- **Older Deedbox opening an upgraded vault** → refused as too new. A
+- **Older Paperkist opening an upgraded vault** → refused as too new. A
   downgrade path is not offered.
 
 ## 7. Tests

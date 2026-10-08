@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to Deedbox are documented in this file.
+All notable changes to Paperkist are documented in this file.
 
 The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this
@@ -20,12 +20,18 @@ The `[Unreleased]` block stays at the top, always, even when empty.
   not the names, the contents or the documents' own dates.
 
 - **A vault survives a crash or power cut** (DEED-0003)
-  Deedbox keeps a catalogue of the vault and repairs whatever an
+  Paperkist keeps a catalogue of the vault and repairs whatever an
   interrupted save left behind the next time the vault opens, so every
   document filed before a crash is still there. Only one copy of the
   app can have a vault open at a time.
 
 - **Vaults made by an older release open in a newer one** (DEED-0004)
-  A newer Deedbox upgrades an older vault the first time it opens it,
+  A newer Paperkist upgrades an older vault the first time it opens it,
   rewriting only the kinds of file whose format changed. An upgrade cut
   off by a crash or power cut carries on at the next open.
+
+### Changed
+
+- **The app is now called Paperkist** (DEED-0023)
+  Its old name, Deedbox, was taken by other software. Vaults made
+  under the old name still open.

@@ -1,6 +1,6 @@
 <!-- ants-roadmap-format: 1 -->
 <!-- Generated from the Ants Terminal roadmap store. Edit it with roadmap_log; hand edits are discarded by the next write. -->
-# Deedbox — Roadmap
+# Paperkist — Roadmap
 
 > What is planned, in progress and shipped. [CHANGELOG.md](CHANGELOG.md)
 > is the user-facing record of what shipped; released items stay here and
@@ -98,7 +98,7 @@ of success are cited by their `docs/discovery.md` labels, S1 to S10.
   Decided (2026-09-28, owner): Create stays disabled until the owner ticks
   "I understand my documents cannot be recovered without this password"
   (S2). A new password needs 12+ characters, typed twice, no other rules.
-  A new vault defaults to a Deedbox-named folder in Documents, and any
+  A new vault defaults to a Paperkist-named folder in Documents, and any
   folder can be chosen.
 
 - 📋 [DEED-0006] **Filing: category, tags, dates, note, with suggestions.**
@@ -146,7 +146,7 @@ of success are cited by their `docs/discovery.md` labels, S1 to S10.
   Lanes: extract, ui.
 
 - 📋 [DEED-0010] **Export one document or the whole vault.**
-  Original filenames and types, readable without Deedbox, never written
+  Original filenames and types, readable without Paperkist, never written
   inside the vault folder. Serves S7.
   Blocked-by: DEED-0005
   **Layman:** Get any document back out as a normal file, or everything at once.
@@ -192,7 +192,7 @@ of success are cited by their `docs/discovery.md` labels, S1 to S10.
   Done when someone who did not build it installs it on a fresh
   machine per system and files a document without help.
   Blocked-by: DEED-0009, DEED-0013
-  **Layman:** Makes Deedbox installable by anyone on any of the three systems.
+  **Layman:** Makes Paperkist installable by anyone on any of the three systems.
   Kind: package.
   Lanes: packaging.
   Source: design-2026-09-27.
@@ -247,7 +247,7 @@ of success are cited by their `docs/discovery.md` labels, S1 to S10.
   in the tracked Markdown files resolves, in both gate modes. Anchors
   are not checked, only files. tests/test_check_docs.py locks it.
 
-- 📋 [DEED-0023] **Rename the app before the first release.**
+- ✅ [DEED-0023] **Rename the app before the first release.**
   The owner chose to rename (DEED-0016's search, 2026-09-28). Covers the
   product name in text, the Python package, the repository and the
   default vault folder name. The on-disk markers inside vault files
@@ -272,9 +272,13 @@ of success are cited by their `docs/discovery.md` labels, S1 to S10.
   the exact word "Paperkist" found no use (nearest: Paperkast, Paper
   Kiss). EU/UK registers still not reached: TMview's API returned an
   empty body to curl, and the browser extension was not connected.
+  Shipped 2026-10-08: renamed Paperkist after the owner's TMview check
+  of the EU and UK registers found nothing. Package src/paperkist/,
+  repository milnet01/paperkist. vault.deedbox, the DBX* prefixes, the
+  associated-data label and the sample password keep the old name.
 
 - 📋 [DEED-0024] **Opt-in self-updater on Windows, macOS and Linux (Flatpak).**
-  The one network use Deedbox has. Off until the user turns it on;
+  The one network use Paperkist has. Off until the user turns it on;
   a manual "Check for updates" also runs. Modelled on finbreak's
   updater (its FIBR-0054 and FIBR-0131 specs): GitHub releases over
   HTTPS only, the download's signature checked before it replaces
@@ -288,7 +292,7 @@ of success are cited by their `docs/discovery.md` labels, S1 to S10.
   a network library, per docs/design.md rules 3, 7, 10 and 11.
   Decided (2026-09-28, owner, from the design review): the Linux
   Flatpak updates through Flatpak's update portal, which `ui` asks
-  through QtDBus; Deedbox downloads nothing there. `update` downloads
+  through QtDBus; Paperkist downloads nothing there. `update` downloads
   and verifies on Windows and macOS only. The dependency test must also
   let `update` use `tempfile` for a downloaded release (design rule 4),
   and the "updates on" setting is `ui`'s (design § Settings).
@@ -308,7 +312,7 @@ of success are cited by their `docs/discovery.md` labels, S1 to S10.
   install detection on Linux too, to know it is a Flatpak. Say the
   detection half runs on all three systems and only fetch/install is
   Windows and macOS.
-  **Layman:** Deedbox can fetch and install its own new versions, but only if you switch that on.
+  **Layman:** Paperkist can fetch and install its own new versions, but only if you switch that on.
   Kind: feature.
   Source: user-request-2026-09-28.
   Lanes: update, crypto, ui, packaging.
@@ -328,7 +332,7 @@ of success are cited by their `docs/discovery.md` labels, S1 to S10.
   Lanes: design, search, vault.
 
 - 📋 [DEED-0026] **Design: check the damaged-document list against Vault.open's stale-content case.**
-  `Vault.open` in src/deedbox/vault/vault.py also marks as damaged
+  `Vault.open` in src/paperkist/vault/vault.py also marks as damaged
   any document from `index.stale_content` whose content file still
   exists after reconcile. docs/design.md § Opening, in order lists the
   damaged cases and does not name this one. Both cold lanes raised it
@@ -373,7 +377,7 @@ of success are cited by their `docs/discovery.md` labels, S1 to S10.
   find it there, while rule 11 forbids code assuming it runs installed.
   Name the lookup contract (for example: packaging puts it on PATH;
   extract looks only on PATH).
-  **Layman:** Settles what Deedbox records when it cannot read the text in a document, before the reading code is built.
+  **Layman:** Settles what Paperkist records when it cannot read the text in a document, before the reading code is built.
   Kind: doc-fix.
   Source: review-contract design.md loop 9, 2026-09-28.
   Lanes: design, extract, vault.
@@ -386,7 +390,7 @@ The release after 0.1.0. Its items were moved here from "Later" by the owner on 
   `docs/discovery.md` rules it out for the first release only;
   `docs/brief.md` wants it only if it works on all three systems.
   Planned for 0.2.0 by the owner, 2026-09-28.
-  **Layman:** Deedbox could warn you about an expiring passport even when it isn't open.
+  **Layman:** Paperkist could warn you about an expiring passport even when it isn't open.
   Kind: feature.
   Source: discovery-2026-09-27.
   Lanes: ui.
@@ -438,19 +442,19 @@ Everyone can use it: languages, accessibility and themes. Set by the owner on
   user-facing string translatable and layouts that mirror for
   right-to-left, which is cheapest to decide before the windows are
   built; the path to 1.0.0 proposal settles when.
-  **Layman:** Use Deedbox in your own language, including Afrikaans, Arabic or Hebrew, and Spanish or Portuguese as spoken in the Americas.
+  **Layman:** Use Paperkist in your own language, including Afrikaans, Arabic or Hebrew, and Spanish or Portuguese as spoken in the Americas.
   Kind: feature.
   Source: user-request-2026-09-28.
   Lanes: ui, packaging.
 
 - 📋 [DEED-0028] **Themes.**
-  **Layman:** Choose how Deedbox looks, such as light or dark.
+  **Layman:** Choose how Paperkist looks, such as light or dark.
   Kind: feature.
   Source: user-request-2026-09-28.
   Lanes: ui.
 
 - 📋 [DEED-0029] **Accessibility.**
-  **Layman:** Make Deedbox usable with a keyboard alone, a screen reader, large text and high contrast.
+  **Layman:** Make Paperkist usable with a keyboard alone, a screen reader, large text and high contrast.
   Kind: accessibility.
   Source: user-request-2026-09-28.
   Lanes: ui.
@@ -464,7 +468,7 @@ The promise: safe to trust with your passports for years. Set by the owner on
   State that format 1.0 is supported by every later release, and
   how a future format change is handled (migrate, never refuse).
   Builds on S9 and docs/specs/DEED-0004-format-migration.md.
-  **Layman:** A written promise that every future Deedbox opens a vault made with 1.0.
+  **Layman:** A written promise that every future Paperkist opens a vault made with 1.0.
   Kind: doc.
   Source: user-request-2026-09-28.
   Lanes: vault, docs.
@@ -479,7 +483,7 @@ The promise: safe to trust with your passports for years. Set by the owner on
 - 📋 [DEED-0032] **Tested by non-technical people on all three systems.**
   Beyond the owner's week (DEED-0011): strangers on each system,
   against S1, S2 and S3. What trips them up is filed and fixed.
-  **Layman:** People who have never seen Deedbox install and use it on Windows, macOS and Linux, and we fix what trips them up.
+  **Layman:** People who have never seen Paperkist install and use it on Windows, macOS and Linux, and we fix what trips them up.
   Kind: test.
   Source: user-request-2026-09-28.
   Lanes: ui, packaging.

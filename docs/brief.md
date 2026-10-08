@@ -1,4 +1,4 @@
-# Deedbox
+# Paperkist
 
 **Every important piece of paper you own, in one locked drawer on your own
 computer — and a nudge before a warranty runs out.**
@@ -21,6 +21,10 @@ computer — and a nudge before a warranty runs out.**
 > **Named Deedbox (2026-09-25).** "Folio", the working name, is taken; see
 > [Prior-art check](#prior-art-check-2026-09-25). A deed box is a lockable
 > box for important papers.
+>
+> **Renamed Paperkist (2026-10-08).** Other software took the name Deedbox
+> in 2026 (DEED-0016), so the owner chose a new one (DEED-0023). A kist is
+> a chest.
 
 ---
 
@@ -40,7 +44,7 @@ scattering of PDFs in Downloads, and some photos on a phone.
 Two things go wrong. You can't *find* the receipt when the thing breaks. And
 you don't find out the warranty expired until after it mattered.
 
-That problem isn't yours alone — almost everyone has it. So Deedbox is built for
+That problem isn't yours alone — almost everyone has it. So Paperkist is built for
 the public: someone who has never heard of encryption should be able to
 install it, set a password and file their first receipt without help.
 
@@ -88,7 +92,7 @@ tracking on Windows, macOS and Linux.** The gap is real.
 - **Find it** — search across titles, tags, notes *and the text inside the
   documents* (see OCR below).
 - **Track expiry** — a document can carry an expiry or renewal date (warranty
-  ends, policy renews, licence expires, guarantee runs out). Deedbox tells you
+  ends, policy renews, licence expires, guarantee runs out). Paperkist tells you
   what's coming up.
 - **Get it back out** — open, export, or print any document, and export the
   whole vault in a plain readable form. No hostage-taking.
@@ -130,7 +134,7 @@ Practical consequences worth writing down before you code:
   confirm the recipe on all three, not just the one you develop on.
 - Document filenames on disk must not leak anything — random IDs, not
   `medical-results-2026.pdf.enc`.
-- **Show documents inside Deedbox's own window, decrypted in memory.** Handing a
+- **Show documents inside Paperkist's own window, decrypted in memory.** Handing a
   document to an outside PDF viewer means writing a decrypted copy to disk,
   and that copy is the weak point of the whole design. The Linux-only answer
   (the user's runtime directory) has no equivalent on Windows or macOS, so
@@ -215,8 +219,9 @@ Things a personal tool never needed:
 - **Automated testing on all three platforms.** A public GitHub repository
   gets free build minutes, so this costs nothing.
 - **A licence**, chosen before the first public commit. Done: GPL-3.0.
-- **A name nobody else is using.** Done: "Folio" was taken, so it is Deedbox.
-  A quick web search found no app by that name; a trademark search was not done.
+- **A name nobody else is using.** Done: Paperkist, after "Folio" and
+  "Deedbox" were taken. Checked against the US, EU and UK trademark
+  registers on 2026-09-28 and 2026-10-08 (DEED-0023).
 - **Help written for non-technical people** — especially setup, backup and
   "what happens if I forget my password".
 - **A place to report bugs**, and a security contact for vulnerabilities.
@@ -235,7 +240,7 @@ Things a personal tool never needed:
 - **Should it be a Rolodex feature instead?** Rolodex already has a vault and
   a master password. Attachments-in-Rolodex is a real option and would be less
   work. *Leaning: separate — the storage model genuinely differs (see above),
-  and a public Deedbox shouldn't force Rolodex to become public too.*
+  and a public Paperkist shouldn't force Rolodex to become public too.*
 - **How do reminders reach you when the app isn't open?** A background service
   is a big commitment for one notification, and each platform does it
   differently. *Leaning: check on launch in v1. Optional background reminders

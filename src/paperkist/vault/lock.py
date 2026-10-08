@@ -8,7 +8,7 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-from deedbox.errors import VaultInUse
+from paperkist.errors import VaultInUse
 
 if sys.platform == "win32":
     import msvcrt

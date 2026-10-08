@@ -10,8 +10,8 @@ from collections.abc import Callable
 from pathlib import Path
 from typing import BinaryIO
 
-from deedbox.errors import VaultCorrupt
-from deedbox.vault import atomic, index, layout
+from paperkist.errors import VaultCorrupt
+from paperkist.vault import atomic, index, layout
 
 # (kind, n) turns a file of that kind at format n into one at n + 1: it gets
 # the old file's path, an output stream, the vault key and the document id

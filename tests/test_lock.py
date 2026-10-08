@@ -8,14 +8,14 @@ import sys
 import nacl.pwhash.argon2id as argon2id
 import pytest
 
-from deedbox.errors import VaultInUse
-from deedbox.vault import Vault
+from paperkist.errors import VaultInUse
+from paperkist.vault import Vault
 
 FAST = {"opslimit": argon2id.OPSLIMIT_MIN, "memlimit": argon2id.MEMLIMIT_MIN}
 
 HOLDER = """
 import sys
-from deedbox.vault import Vault
+from paperkist.vault import Vault
 vault = Vault.open(sys.argv[1], "pw")
 print("open", flush=True)
 sys.stdin.read()

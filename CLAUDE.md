@@ -1,4 +1,4 @@
-# Deedbox — instructions for Claude Code
+# Paperkist — instructions for Claude Code
 
 ## Where this project is
 

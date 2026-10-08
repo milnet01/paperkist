@@ -1,4 +1,4 @@
-"""Everything Deedbox encrypts or decrypts. The only module that imports nacl.
+"""Everything Paperkist encrypts or decrypts. The only module that imports nacl.
 
 The formats written here are fixed by docs/specs/DEED-0002-vault-format.md
 (§ 4.2 the key record, § 4.3 content streams and sealed messages, § 4.4 the
@@ -19,7 +19,7 @@ import nacl.exceptions
 import nacl.pwhash.argon2id as argon2id
 import nacl.utils
 
-from deedbox.errors import NotEnoughMemory, VaultCorrupt, VaultTooNew, WrongPassword
+from paperkist.errors import NotEnoughMemory, VaultCorrupt, VaultTooNew, WrongPassword
 
 KEY_RECORD_VERSION = 1
 PIECE = 65536  # plaintext bytes per secretstream piece
@@ -44,6 +44,7 @@ def associated_data(role: str, fmt: int, doc_id: str = "") -> bytes:
     """The bytes every ciphertext is bound to (§ 4.4)."""
     return b"\x00".join(
         [
+            # The app's old name, kept: existing vaults need it (DEED-0023).
             b"deedbox",
             role.encode("ascii"),
             str(fmt).encode("ascii"),
@@ -104,7 +105,7 @@ def unlock(key_record: bytes, password: str) -> bytes:
         and _is_int(mem)
         and _MEMLIMIT_MIN <= mem <= _MEMLIMIT_MAX
     ):
-        raise VaultCorrupt("the key record's settings are not ones Deedbox writes")
+        raise VaultCorrupt("the key record's settings are not ones Paperkist writes")
     salt = _unb64(record.get("salt"), _SALT_BYTES)
     nonce = _unb64(record.get("nonce"), _NONCE_BYTES)
     wrapped = _unb64(record.get("wrapped_key"), _KEY_BYTES + _TAG_BYTES)

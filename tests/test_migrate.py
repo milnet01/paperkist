@@ -2,9 +2,9 @@
 
 INV-1 and INV-2 run against the reader DEED-0002/DEED-0003 already built, so
 they pass today. INV-3 to INV-7 exercise `layout.FILE_FORMAT`,
-`layout.VAULT_FORMAT` and `deedbox.vault.migrate`, which this item creates —
+`layout.VAULT_FORMAT` and `paperkist.vault.migrate`, which this item creates —
 until then they are expected to fail, diagnosably, at the first line that
-touches one of those. `deedbox.vault.migrate` is imported inside each such
+touches one of those. `paperkist.vault.migrate` is imported inside each such
 test (never at module scope) so a missing module fails only that test, not
 collection of the whole file.
 """
@@ -21,9 +21,9 @@ from pathlib import Path
 import nacl.pwhash.argon2id as argon2id
 import pytest
 
-from deedbox import crypto
-from deedbox.errors import VaultCorrupt, VaultTooNew
-from deedbox.vault import Vault, documents, layout
+from paperkist import crypto
+from paperkist.errors import VaultCorrupt, VaultTooNew
+from paperkist.vault import Vault, documents, layout
 from fixtures import sample_vault
 
 FAST = {"opslimit": argon2id.OPSLIMIT_MIN, "memlimit": argon2id.MEMLIMIT_MIN}
@@ -157,7 +157,7 @@ def test_migrates_to_current(tmp_path, monkeypatch):
         p.relative_to(folder): p.read_bytes() for p in (folder / "objects").glob("*")
     }
 
-    from deedbox.vault import (
+    from paperkist.vault import (
         migrate,
     )  # does not exist yet: expected ModuleNotFoundError
 
@@ -204,7 +204,7 @@ def test_interrupted_migration_resumes(tmp_path, monkeypatch):
     before_entries = vault.documents()
     vault.close()
 
-    from deedbox.vault import (
+    from paperkist.vault import (
         migrate,
     )  # does not exist yet: expected ModuleNotFoundError
 
@@ -298,7 +298,7 @@ def test_unreadable_file_survives(tmp_path, monkeypatch):
     corrupt_last_byte(layout.content_path(folder, listed_bad_content))
     unlisted_meta_bytes = unlisted_meta_path.read_bytes()
 
-    from deedbox.vault import (
+    from paperkist.vault import (
         migrate,
     )  # does not exist yet: expected ModuleNotFoundError
 

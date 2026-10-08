@@ -14,16 +14,16 @@ import datetime
 import json
 from pathlib import Path
 
-from deedbox import crypto
-from deedbox.errors import (
+from paperkist import crypto
+from paperkist.errors import (
     DocumentMissing,
     NotAVault,
     VaultCorrupt,
     VaultExists,
     VaultTooNew,
 )
-from deedbox.vault import atomic, documents, index, layout, migrate
-from deedbox.vault.lock import VaultLock
+from paperkist.vault import atomic, documents, index, layout, migrate
+from paperkist.vault.lock import VaultLock
 
 LOCK = "lock"
 
