@@ -169,6 +169,8 @@ def test_a_pdf_is_shown_without_a_readable_copy_on_disk(qt, tmp_path, monkeypatc
     assert document.status() == QPdfDocument.Status.Ready
     assert document.pageCount() == 1
     assert writes == []
+    window.close()  # releases the vault's lock, which Windows will not let us read
+    QApplication.processEvents()
     assert copies_on_disk(tmp_path, data, source) == []
     assert list(temp.iterdir()) == []
 
@@ -187,6 +189,8 @@ def test_an_image_is_shown_without_a_readable_copy_on_disk(qt, tmp_path, monkeyp
     assert image.isVisible()
     assert not image.pixmap().isNull()
     assert writes == []
+    window.close()  # releases the vault's lock, which Windows will not let us read
+    QApplication.processEvents()
     assert copies_on_disk(tmp_path, data, source) == []
     assert list(temp.iterdir()) == []
 
