@@ -109,6 +109,7 @@ class CreateDialog(QDialog):
         layout.addWidget(self._understood)
         layout.addWidget(self._hint)
         layout.addWidget(self._message)
+        layout.addStretch()  # keep the fields together when the window grows
         layout.addWidget(buttons)
 
         for edit in (self._folder, self._password, self._confirm):

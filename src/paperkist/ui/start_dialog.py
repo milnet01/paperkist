@@ -78,6 +78,7 @@ class StartDialog(QDialog):
         layout.addWidget(intro)
         layout.addLayout(form)
         layout.addWidget(self._message)
+        layout.addStretch()  # keep the fields together when the window grows
         layout.addWidget(buttons)
 
         if self._folder.text():

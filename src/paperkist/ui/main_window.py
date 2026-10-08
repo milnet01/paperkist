@@ -13,6 +13,7 @@ from PySide6.QtGui import QAction, QStandardItem, QStandardItemModel
 from PySide6.QtWidgets import (
     QAbstractItemView,
     QFileDialog,
+    QHeaderView,
     QLabel,
     QMainWindow,
     QMessageBox,
@@ -49,7 +50,10 @@ class MainWindow(QMainWindow):
         self._list.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
         self._list.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
         self._list.verticalHeader().hide()
-        self._list.horizontalHeader().setStretchLastSection(True)
+        header = self._list.horizontalHeader()
+        header.setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
+        for column in (1, 2):
+            header.setSectionResizeMode(column, QHeaderView.ResizeMode.ResizeToContents)
         self._list.selectionModel().currentRowChanged.connect(self._show)
 
         hint = QLabel(self.tr("Drag documents onto this window to add them."))
@@ -64,7 +68,8 @@ class MainWindow(QMainWindow):
         splitter = QSplitter(Qt.Orientation.Horizontal)
         splitter.addWidget(side)
         splitter.addWidget(self._viewer)
-        splitter.setStretchFactor(1, 1)
+        splitter.setStretchFactor(0, 1)  # the list gets a third of the width
+        splitter.setStretchFactor(1, 2)
         self.setCentralWidget(splitter)
 
         add = QAction(self.tr("Add documents…"), self)
