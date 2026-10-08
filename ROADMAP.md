@@ -133,6 +133,9 @@ of success are cited by their `docs/discovery.md` labels, S1 to S10.
   hidden. Serves S4. Done when a warranty dated next week shows up and
   one dated last year is flagged.
   Blocked-by: DEED-0006
+  Note (2026-10-08): DEED-0005 left the expiry check on opening to this
+  item. The design says `ui` runs it when the main window opens; the hook
+  is MainWindow.__init__ in src/paperkist/ui/main_window.py.
   **Layman:** Shows what is about to run out as soon as you open the app.
   Kind: implement.
   Source: design-2026-09-27.
@@ -392,6 +395,16 @@ of success are cited by their `docs/discovery.md` labels, S1 to S10.
   Kind: doc-fix.
   Source: review-contract design.md loop 9, 2026-09-28.
   Lanes: design, extract, vault.
+
+- 📋 [DEED-0037] **Unlock and create without freezing the window.**
+  DEED-0005 runs Vault.create and Vault.open in the window's own thread
+  behind a busy cursor; the real key settings take about a second, and
+  a slower machine longer. Move them to a worker thread that `ui` owns
+  (design § Background work).
+  **Layman:** The window stays responsive while your password is being checked.
+  Kind: ux.
+  Source: in-session-2026-10-08.
+  Lanes: ui.
 
 ## 0.2.0
 
